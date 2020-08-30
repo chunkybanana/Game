@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .active::after{
+            content: "<"
+        }
+    </style>
+</head>
+<body onload="startGame()">
+    <canvas id="canvas" style="border: 1px solid grey"></canvas>
+    <div id="dialog"></div>
+    <script>
+        var myGamePiece;
+        var scene = 1;
+        var dialog = document.getElementById("dialog");
+        
+        function component(width, height, color, x, y, type) {
+            //image check
+            this.type = type;
+            if (this.type == "image") {
+                this.image = new Image();
+                this.image.src = color;
+            }
+            //presets
+
+            this.angle = 0;
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.speedX = 0;
+            this.speedY = 0;
+            this.gravity = 0.05;
+            this.gravitySpeed = 0;
+            //update function, draws component when called on: rotate, translate and restore are part of rotatable components. 
+            this.update = function () {
+                ctx = myGameArea.context;
+                if (type == "image") {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.angle);
+                    ctx.drawImage(this.image,
+                        this.width / -2, this.height / -2,
+                        this.width, this.height);
+                    ctx.restore();
+                } else {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.angle);
+                    ctx.fillStyle = color;
+                    ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);
+                    ctx.restore();
+                }
+            }
+            //moves  
+            this.newPos = function () {
+                this.gravitySpeed += this.gravity;
+                this.x += this.speedX;
+                this.y += this.speedY + this.gravitySpeed;
+                this.hitBottom();
+                this.hitTop();
+            }
+            //stops from hitting bottom
+            this.hitBottom = function () {
+                var rockbottom = 448;
+                if (this.y > rockbottom) {
+                    this.y = rockbottom;
+                    this.gravitySpeed = 0;
+                }
+
+            }
+            //stops from hitting top
+            this.hitTop = function () {
+                if (this.y < 0) {
+                    this.y = 0;
+                    this.gravitySpeed = 0;
+                }
+
+            }
+        }
+        var myGamePiece;
+
+        function startGame() {
+            myGameArea.start();
+            myGamePiece = new component(30, 30, "red", 15, 120);
+        }
+
+        var myGameArea = {
+            canvas: document.getElementById("canvas"),
+            start: function () {
+                this.canvas.width = 960;
+                this.canvas.height = 540;
+                this.context = this.canvas.getContext("2d");
+                this.interval = setInterval(updateGameArea, 20);
+                 window.addEventListener('keydown', function (e) {
+                    myGameArea.keys = (myGameArea.keys || []);
+                    myGameArea.keys[e.keyCode] += 1;
+                 })
+                 window.addEventListener('keyup', function (e) {
+                    myGameArea.keys[e.keyCode] = 0;
+                 })
+            },
+            clear : function() {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        };
+        var dialogrow = 0;
+        function updateGameArea() {
+            console.log(scene)
+            if (scene == 1) {
+                myGameArea.context.fillStyle = "black";
+                myGameArea.context.fillRect(0,0,960,540);
+
+                dialogue("Awaken my child");
+                setTimeout(dialogue,3000,"Hurry up, please wake up!");
+                setTimeout(dialogue,6000,"WAKE UP NOW, PLEASE!");
+                setTimeout(dialogue,9000,"PLEASE! DON'T GO NOW!");
+                setTimeout(dialogue,12000, "<i>How did you get this message?</i>")
+                console.log(dialog.innerHTML)
+                scene = 1.1;
+            }
+            if (scene == 1.1) {
+                                myGameArea.context.fillStyle = "black";
+                                myGameArea.context.fillRect(0,0,960,540);
+
+                setTimeout(sceneset,15000,2);
+            }
+            if (scene == 2) {
+                 myGameArea.context.fillStyle = "Green";
+                 myGameArea.context.fillRect(0,0,960,540);
+                 dialogue("Guard: Hello?");
+                 dialogue("Guard: Hello?<br><br><span class='option' id='2.1' >Where am I?</span><br><span class='option' id='2.2'>Who are you?</span>")
+                
+            }
+            if (scene == 2.1) {
+                setTimeout(dialogue,0000,"You: Where am I?");
+
+                setTimeout(dialogue,1000,"Guard:You are in the castle of Smae of course");
+                setTimeout(dialogue,2000,"You:Ok");
+                setTimeout(dialogue,4000,"You: Who are you?");
+                setTimeout(dialogue,6000,"Guard: I am an honorary guard of the second britalion ");                
+                setTimeout(dialogue,8000,"You: How did I get here?");
+                setTimeout(dialogue,10000,"Guard: We just saw you sleeping on the ground.");
+                setTimeout(dialogue,12000,"You: Wait wait… where am I again??");
+                setTimeout(dialogue,14000,"Guard: The Castle Of Smae.");
+                setTimeout(dialogue,16000,"You: What happens in this place?");
+                setTimeout(dialogue,18000,"Guard: Well it's mostly just people in a castle living their lives.");
+                setTimeout(dialogue,20000,"You: Do you know who rules this place?");
+                setTimeout(dialogue,22000,"Guard: Its King Smae I. He is the ruler of this place");
+                setTimeout(dialogue,24000,"You: Ok.");
+                setTimeout(dialogue,26000,"Guard: Your welcome");
+                setTimeout(dialogue,28000,"You: Also where is the nearest market, I'm STARVING!!!!");
+                setTimeout(dialogue,30000,"Guard: Oh it's just down the road. But here's my leftover lunch.");
+                setTimeout(dialogue,32000,"<i>Bread added to inventory</i>");
+                setTimeout(dialogue,34000,"You: Thanks and bye!");
+                setTimeout(dialogue,36000,"Guard: Bye!");
+                setTimeout(dialogue,38000,"<i>You walk to the market</i>");
+
+                scene = 2.11;
+ 
+            }
+            if (scene == 2.2) {
+                setTimeout(dialogue,0000,"You: Who are you?");
+                setTimeout(dialogue,3000,"Guard: I am an honorary guard of the second britalion ");                
+                setTimeout(dialogue,6000,"You: How did I get here?");
+                setTimeout(dialogue,90000,"Guard: We just saw you sleeping on the ground.");
+                setTimeout(dialogue,12000,"You: Wait wait… where am I again??");
+                setTimeout(dialogue,14000,"Guard: The Castle Of Smae.");
+                setTimeout(dialogue,16000,"You: What happens in this place?");
+                setTimeout(dialogue,18000,"Guard: Well it's mostly just people in a castle living their lives.");
+                setTimeout(dialogue,20000,"You: Do you know who rules this place?");
+                setTimeout(dialogue,22000,"Guard: Its King Smae I. He is the ruler of this place");
+                setTimeout(dialogue,24000,"You: Ok.");
+                setTimeout(dialogue,26000,"Guard: Your welcome");
+                setTimeout(dialogue,28000,"You: Also where is the nearest market, I'm STARVING!!!!");
+                setTimeout(dialogue,30000,"Guard: Oh it's just down the road. But here's my leftover lunch.");
+                setTimeout(dialogue,32000,"<i>Bread added to inventory</i>");
+                setTimeout(dialogue,34000,"You: Thanks and bye!");
+                setTimeout(dialogue,36000,"Guard: Bye!");
+                setTimeout(dialogue,38000,"<i>You walk to the market</i>");
+
+                scene = 2.11;
+ 
+            }
+
+            if (scene == 2.11) {
+                setTimeout(sceneset,40000,2.3);
+            }
+            if (scene == 2.3) {
+                myGameArea.context.fillStyle = "purple";
+                myGameArea.context.fillRect(0,0,960,540);
+                setTimeout(sceneset,4000,3)
+            }
+            if (scene == 3) {
+                dialogue("<i>You enter the market. There is a store, and an old lady.</i><br><br><span class='option' id='3.1' ><i>Look at the shop</i></span><br><span class='option' id='3.2'><i>Talk to the old lady</i></span>")
+            }
+            if (scene == 3.1) {
+                dialogue("<i>You walk up to the map store.</i><br><br>Shopkeeper One: hello youngling what are you doing in my humble map making shop.<br><br><span class='option' id='3.11' >Map making shop?</span><br><span class='option' id='3.12'>What's your name?</span>")
+            }
+            if (scene == 3.11) {
+                setTimeout(dialogue,0000,"You: Map making shop?");
+                setTimeout(dialogue,3000,"Shopkeeper One: ye this tis me lil shop do you want to have one I think I might have a spere map of smae castle but if you want more you’ll Have ta give me ten gems. Well do ya wan it?<br><br><span class='option' id='3.111'>Yes please</span><br><span class='option' id='3.112'>No thanks</span>");
+
+                scene = 3.011;
+            }
+            if (scene == 3.111) {
+                dialogue("Shopkeeper: Tat’ would be 10 gems please!")
+                setTimeout(dialogue, 3000, "You: … Oh right I don't have any gems, I'm sorry")
+                setTimeout(dialogue, 6000, "Shopkeeper: Oh, It’s ok I don’t need this crusty lil map anyways! Here, have it for free!")
+                setTimeout(dialogue, 8000, "<i>The Smae Kingdom Map added to your inventory</i>")
+                setTimeout(dialogue, 10000, "<i>Press E to use</i>")
+                setTimeout(dialogue, 12000, "You: Thanks! ")
+                scene = 3.1111;
+            }
+            if (scene == 3.1111) {
+                setTimeout( sceneset,15000,4)
+            }
+            if (scene == 3.112) {
+                dialogue("Shopkeeper: Why not sonny?")
+                setTimeout(dialogue, 3000, "You: I don't have any gems!")
+                setTimeout(dialogue, 6000, "Shopkeeper: That's no problem boy! I didn't need this crusty map anyways! Here you go!")
+                setTimeout(dialogue, 8000, "<i>The Smae Kingdom Map added to your inventory</i>")
+                setTimeout(dialogue, 10000, "<i>Press E to use</i>")
+                setTimeout(dialogue, 12000, "You: Thanks! ")
+                scene = 3.1111;
+            }
+            if (scene == 3.12) {
+                dialogue("Shopkeeper: Yes! A map making shop! We make maps for near and far! Now sonny boy, do ya want anything ?<br><br><span class='option' id='3.11'>Could I have a map of Smae Kingdom?</span><br><span class='option' id='3.3' >No thanks</span>")
+            }
+            if (scene == 3.3) {
+                dialogue("Shopkeeper: Okay! See you round! ");
+                setTimeout(sceneset, 3000, 4);
+            }
+            if (scene == 3.2) {
+                setTimeout(dialogue, 0000,"Old Lady: Hello? What are you doing here young one?<br><br><span class='option' id='3.21'>What is this place?</span><br><span class='option' id='3.22'>Who are you?</span>")
+            }
+            if (scene == 3.21) {
+                setTimeout(dialogue, 0000, "You: What is this place?")
+                setTimeout(dialogue, 3000, "Old Lady: You’re in Market Market obviously!")
+                setTimeout(dialogue, 6000, "You: Do you know where to buy food?")
+                setTimeout(dialogue, 9000, "Old Lady: Look around you!")
+                setTimeout(dialogue, 12000, "You: Ok thanks.")
+                scene = 3.211;
+            }
+            if (scene == 3.211) {
+                setTimeout(sceneset, 15000, 4);
+            }
+            if (scene == 3.22) {
+                setTimeout(dialogue, 0000, "You: Who are you?")
+                setTimeout(dialogue, 3000, "Old Lady: I'm just an old lady buying food for dinner.")
+                setTimeout(dialogue, 6000, "You: What do you think the best food here is?")
+                setTimeout(dialogue, 9000, "Old Lady: Definity the Boar Slice! It's a slice of cake with some secret ingredient that we the people can't know.")
+                setTimeout(dialogue, 12000, "Old Lady: I have one in my bag you can have it.")
+                setTimeout(dialogue, 15000, "<i>The Bore Slice added to your inventory</i>")
+                setTimeout(dialogue, 18000, "<i> Press E to eat </i>")
+                scene = 3.212;
+            }
+            if (scene == 3.212) {
+                setTimeout(sceneset,21000,4)
+            }
+            if (scene == 4) {
+                dialogue("The end for now! You have reached a part of the game which is still under development.")
+            }
+            var ops = document.getElementsByClassName("option");
+            if (myGameArea.keys && myGameArea.keys[38] >= 1) {
+                myGameArea.keys[38] = 0;
+                dialogrow -= 1;
+                if (dialogrow == -1) {
+                    dialogrow = ops.length - 1;
+                }
+            }
+            if (myGameArea.keys && myGameArea.keys[40] >= 1 ) {
+                myGameArea.keys[40] = 0;
+
+                dialogrow += 1;
+                if (dialogrow == ops.length) {
+                    dialogrow = 0;
+                }
+            }
+            if (myGameArea.keys && myGameArea.keys[39] >= 1){
+                myGameArea.keys[39] = 0;
+            sceneset(ops[dialogrow].id);
+            console.log("PAPAYa")
+        }
+            for (var x = 0; x < ops.length; x++) {
+                if (x == dialogrow) {
+                    ops[x].classList.add("active");
+                    
+                } else {
+                    ops[x].classList.remove("active");
+                }
+                console.log(ops[x].classList)
+            }
+            console.log(scene)
+        }
+        
+        function sceneset(x) {
+scene = x;
+        }
+        function dialogue(x) {
+            dialog.innerHTML = x;
+        }
+    </script>
+</body>
+</html>
