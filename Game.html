@@ -14,7 +14,11 @@
     <div id="dialog"></div>
     <script>
         var myGamePiece;
+<<<<<<< HEAD
         var scene = 1;
+=======
+        var scene = 2.3;
+>>>>>>> 395879e541406833e5f116cc27030a7bf83e82d0
         var dialog = document.getElementById("dialog");
         
         function component(width, height, color, x, y, type) {
@@ -109,7 +113,11 @@
         };
         var dialogrow = 0;
         function updateGameArea() {
+<<<<<<< HEAD
             console.log(scene)
+=======
+            myGameArea.clear();
+>>>>>>> 395879e541406833e5f116cc27030a7bf83e82d0
             if (scene == 1) {
                 myGameArea.context.fillStyle = "black";
                 myGameArea.context.fillRect(0,0,960,540);
@@ -202,6 +210,7 @@
             }
             if (scene == 3.11) {
                 setTimeout(dialogue,0000,"You: Map making shop?");
+<<<<<<< HEAD
                 setTimeout(dialogue,3000,"Shopkeeper One: ye this tis me lil shop do you want to have one I think I might have a spere map of smae castle but if you want more you’ll Have ta give me ten gems. Well do ya wan it?<br><br><span class='option' id='3.111'>Yes please</span><br><span class='option' id='3.112'>No thanks</span>");
 
                 scene = 3.011;
@@ -263,6 +272,15 @@
             }
             if (scene == 4) {
                 dialogue("The end for now! You have reached a part of the game which is still under development.")
+=======
+                setTimeout(dialogue,3000,"Shopkeeper One: ye this tis me lil shop do you want to have one I think I might have a spere map of smae castle but if you want more you’ll Have ta give me ten gems. Well do ya wan it?<span class='option' id='3.111'>Yes please</span><br><span class='option' id='3.112'>No thanks</span>");
+
+                scene = 3.111;
+            }
+            
+            if (scene == 3.2) {
+
+>>>>>>> 395879e541406833e5f116cc27030a7bf83e82d0
             }
             var ops = document.getElementsByClassName("option");
             if (myGameArea.keys && myGameArea.keys[38] >= 1) {
