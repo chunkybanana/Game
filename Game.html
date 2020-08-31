@@ -71,7 +71,8 @@
                 setTimeout(dialogue,26000,"Guard: Your welcome");
                 setTimeout(dialogue,28000,"You: Also where is the nearest market, I'm STARVING!!!!");
                 setTimeout(dialogue,30000,"Guard: Oh it's just down the road. But here's my leftover lunch.");
-                setTimeout(dialogue,32000,"<i>Bread added to inventory</i>");
+                setTimeout(dialogue,32000, "<i>Bread added to inventory</i>");
+                setTimeout(invpush, 32000, "Bread", "bread.png")
                 setTimeout(dialogue,34000,"You: Thanks and bye!");
                 setTimeout(dialogue,36000,"Guard: Bye!");
                 setTimeout(dialogue,38000,"<i>You walk to the market</i>");
@@ -171,6 +172,8 @@
                 setTimeout(dialogue, 9000, "Old Lady: Definity the Boar Slice! It's a slice of cake with some secret ingredient that we the people can't know.")
                 setTimeout(dialogue, 12000, "Old Lady: I have one in my bag you can have it.")
                 setTimeout(dialogue, 15000, "<i>The Bore Slice added to your inventory</i>")
+                setTimeout(invpush,15000,"Bore Slice", "boreslice.png")
+
                 setTimeout(dialogue, 18000, "<i> Press E to eat </i>")
                 scene = 3.212;
             }
@@ -216,7 +219,11 @@
                 inventory.innerHTML += "<img src='" + itemimgs[x] + "'style='width: 30px; height: 30px' /><span class='invitem'>" + itemlist[x] + "</span><br>"
             }
         }
-        
+        function invpush(item, src) {
+            itemlist.push(item);
+            itemimgs.push(src)
+            console.log(item,src)
+        }
         function sceneset(x) {
 scene = x;
         }
