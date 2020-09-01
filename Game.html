@@ -3,22 +3,149 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
     <style>
-        .active::after{
+        .other, .common, .uncommon, .rare, .limited, .scarce, .extreme, .isolated, .godly, .invisible, .impossible, .theone, .q {
+            font-family: 'Quicksand';
+            font-weight: bold;
+        }
+    
+        .active::after {
             content: "<"
         }
+
+        .common {
+            font-style: italic;
+            color: #e89998;
+            background-color: black;
+        }
+
+            .common:before {
+                content: "Common";
+            }
+
+        .uncommon {
+            font-style: italic;
+            color: #fff2ca;
+            background-color: black;
+        }
+
+            .uncommon:before {
+                content: "Uncommon";
+            }
+
+        .rare {
+            font-style: italic;
+            color: #a0c5ea;
+            background-color: black;
+        }
+
+            .rare:before {
+                content: "Rare";
+            }
+
+        .limited {
+            font-style: italic;
+            color: #0800ff;
+            background-color: black;
+        }
+
+            .limited:before {
+                content: "Limited";
+            }
+
+        .scarce {
+            font-style: italic;
+            color: #2bff00;
+            background-color: black;
+        }
+
+            .scarce:before {
+                content: "Scarce";
+            }
+
+        .extreme {
+            font-style: italic;
+            color: #ffff00;
+            background-color: black;
+        }
+
+            .extreme:before {
+                content: "Extreme";
+            }
+
+        .isolated {
+            font-style: italic;
+            color: #fd9900;
+            background-color: black;
+        }
+
+            .isolated:before {
+                content: "Isolated";
+            }
+
+        .godly {
+            font-style: italic;
+            color: #fc0000;
+            background-color: black;
+        }
+
+            .godly:before {
+                content: "Godly";
+            }
+
+        .invisible {
+            font-style: italic;
+            color: #b7b7b7;
+            background-color: black;
+        }
+
+            .invisible:before {
+                content: "Invisible";
+            }
+
+        .impossible {
+            font-style: italic;
+            color: #ffffff;
+            background-color: black;
+        }
+
+            .impossible:before {
+                content: "Impossible";
+            }
+
+        .theone {
+            font-style: italic;
+            color: #000000;
+            background-color: white;
+        }
+
+            .theone:before {
+                content: "The One";
+            }
+
+        .q {
+            font-style: italic;
+            color: #fc00ff;
+            background-color: black;
+        }
+
+            .q:before {
+                content: "Q";
+            }
     </style>
 </head>
 <body onload="startGame()">
     <div id="dialog"></div>
     <div id="inv"></div>
     <script>
+        var invraritys = [];
         var inventory = document.getElementById("inv");
         var itemlist = [];
         var itemimgs = [];
         var scene = 1;
         var dialog = document.getElementById("dialog");
-        setInterval(updateGameArea, 10);
+        var int = setInterval(updateGameArea, 10);
         var keys;
                  window.addEventListener('keydown', function (e) {
                     keys = (keys || []);
@@ -95,7 +222,9 @@
                 setTimeout(dialogue,26000,"Guard: Your welcome");
                 setTimeout(dialogue,28000,"You: Also where is the nearest market, I'm STARVING!!!!");
                 setTimeout(dialogue,30000,"Guard: Oh it's just down the road. But here's my leftover lunch.");
-                setTimeout(dialogue,32000,"<i>Bread added to inventory</i>");
+                setTimeout(dialogue, 32000, "<i>Bread added to inventory</i>");
+                setTimeout(invpush, 32000, "Bread", "bread.png")
+
                 setTimeout(dialogue,34000,"You: Thanks and bye!");
                 setTimeout(dialogue,36000,"Guard: Bye!");
                 setTimeout(dialogue,38000,"<i>You walk to the market</i>");
@@ -130,10 +259,26 @@
                 setTimeout(dialogue, 8000, "<i>The Smae Kingdom Map added to your inventory</i>")
                 setTimeout(dialogue, 10000, "<i>Press E to use</i>")
                 setTimeout(dialogue, 12000, "You: Thanks! ")
+                setTimeout(dialogue, 18000, "Shopkeeper: Here's a bunch of random useless stuff! ")
+                
+                setTimeout(invpush, 18000, "Fish", "fish.png","common");
+                setTimeout(invpush, 18000, "paper", "paper.png","uncommon");
+                setTimeout(invpush, 18000, "Portal", "portal.png","rare");
+                setTimeout(invpush, 18000, "Canoe Paddle", "paddle.png","limited");
+                setTimeout(invpush, 18000, "Brick", "brick.png","scarce");
+                setTimeout(invpush, 18000, "Blanket", "blanket.png","extreme");
+                setTimeout(invpush, 18000, "star", "star.png", "isolated");
+                setTimeout(invpush, 18000, "star", "star.png", "godly");
+                setTimeout(invpush, 18000, "star", "star.png", "rainbow");
+                setTimeout(invpush, 18000, "star", "star.png", "invisible");
+                setTimeout(invpush, 18000, "Axe", "axe.png", "impossible");
+                setTimeout(invpush, 18000, "Axe", "axe.png", "theone");
+                setTimeout(invpush, 18000, "Axe", "axe.png", "???");
+                setTimeout(invpush, 18000, "Axe", "axe.png", "q");
                 scene = 3.1111;
             }
             if (scene == 3.1111) {
-                setTimeout( sceneset,15000,4)
+                setTimeout( sceneset,21000,4)
             }
             if (scene == 3.112) {
                 dialogue("Shopkeeper: Why not sonny?")
@@ -142,7 +287,7 @@
                 setTimeout(dialogue, 8000, "<i>The Smae Kingdom Map added to your inventory</i>")
                 setTimeout(dialogue, 10000, "<i>Press E to use</i>")
                 setTimeout(dialogue, 12000, "You: Thanks! ")
-                scene = 3.1111;
+                scene = 3.1111; 
             }
             if (scene == 3.12) {
                 dialogue("Shopkeeper: Yes! A map making shop! We make maps for near and far! Now sonny boy, do ya want anything ?<br><br><span class='option' id='3.11'>Could I have a map of Smae Kingdom?</span><br><span class='option' id='3.3' >No thanks</span>")
@@ -172,7 +317,7 @@
                 setTimeout(dialogue, 9000, "Old Lady: Definity the Boar Slice! It's a slice of cake with some secret ingredient that we the people can't know.")
                 setTimeout(dialogue, 12000, "Old Lady: I have one in my bag you can have it.")
                 setTimeout(dialogue, 15000, "<i>The Bore Slice added to your inventory</i>")
-                setTimeout(invpush,15000,"Bore Slice", "boreslice.png")
+                setTimeout(invpush,15000,"Bore Slice", "boreslice.png","uncommon")
 
                 setTimeout(dialogue, 18000, "<i> Press E to eat </i>")
                 scene = 3.212;
@@ -182,6 +327,7 @@
             }
             if (scene == 4) {
                 dialogue("The end for now! You have reached a part of the game which is still under development.")
+                clearInterval(int);
             }
             var ops = document.getElementsByClassName("option");
             if (keys && keys[38] >= 1) {
@@ -216,12 +362,20 @@
             console.log(scene)
             inventory.innerHTML = "";
             for (var x = 0; x < itemlist.length; x++) {
-                inventory.innerHTML += "<img src='" + itemimgs[x] + "'style='width: 30px; height: 30px' /><span class='invitem'>" + itemlist[x] + "</span><br>"
+                inventory.innerHTML += "<img src='" + itemimgs[x] + "'style='width: 30px; height: 30px' /><span class='invitem'>" + itemlist[x] + "</span>"
+                if (invraritys[x] == "rainbow") {
+                    inventory.innerHTML += "<span class='other'><span style='color: red; font-style: italic; background-color: black'>R</span><span style='color: orange; font-style: italic; background-color: black'>A</span><span style='color: yellow; font-style: italic; background-color: black'>I</span><span style='color: green; font-style: italic; background-color: black'>N</span><span style='color: blue; font-style: italic; background-color: black'>B</span><span style='color: indigo; font-style: italic; background-color: black'>O</span><span style='color: violet; font-style: italic; background-color: black'>W</span></span><br>"
+                } else if (invraritys[x] == "???") {
+                    inventory.innerHTML += "<span class='other'><span style='color: red; font-style: italic; background-color: black'>? </span><span style='color: blue; font-style: italic; background-color: black'>? </span><span style='color: green; font-style: italic; background-color: black'>?</span></span><br>"
+                } else {
+                    inventory.innerHTML += "<span class='" + invraritys[x] + "'></span><br>"
+                }               
             }
         }
-        function invpush(item, src) {
+        function invpush(item, src,rarity) {
             itemlist.push(item);
-            itemimgs.push(src)
+            itemimgs.push(src);
+            invraritys.push(rarity)
             console.log(item,src)
         }
         function sceneset(x) {
