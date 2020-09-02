@@ -138,12 +138,17 @@
 <body onload="startGame()">
     <div id="dialog"></div>
     <div id="inv"></div>
+    <div id="actitem"></div>
     <script>
+        var invrow = 0;
         var invraritys = [];
         var inventory = document.getElementById("inv");
+        var ai = document.getElementById("actitem");
         var itemlist = [];
         var itemimgs = [];
         var scene = 1;
+        var invdesc = [];
+        var invstat = [];
         var dialog = document.getElementById("dialog");
         var int = setInterval(updateGameArea, 10);
         var keys;
@@ -159,86 +164,86 @@
         function updateGameArea() {
             console.log(scene)
             if (scene == 1) {
-             
+
                 dialogue("Awaken my child");
-                setTimeout(dialogue,3000,"Hurry up, please wake up!");
-                setTimeout(dialogue,6000,"WAKE UP NOW, PLEASE!");
-                setTimeout(dialogue,9000,"PLEASE! DON'T GO NOW!");
-                setTimeout(dialogue,12000, "<i>How did you get this message?</i>")
+                setTimeout(dialogue, 3000, "Hurry up, please wake up!");
+                setTimeout(dialogue, 6000, "WAKE UP NOW, PLEASE!");
+                setTimeout(dialogue, 9000, "PLEASE! DON'T GO NOW!");
+                setTimeout(dialogue, 12000, "<i>How did you get this message?</i>")
                 console.log(dialog.innerHTML)
                 scene = 1.1;
             }
             if (scene == 1.1) {
-                                
 
-                setTimeout(sceneset,15000,2);
+
+                setTimeout(sceneset, 15000, 2);
             }
             if (scene == 2) {
-              
-                 dialogue("Guard: Hello?");
-                 dialogue("Guard: Hello?<br><br><span class='option' id='2.1' >Where am I?</span><br><span class='option' id='2.2'>Who are you?</span>")
-                
+
+                dialogue("Guard: Hello?");
+                dialogue("Guard: Hello?<br><br><span class='option' id='2.1' >Where am I?</span><br><span class='option' id='2.2'>Who are you?</span>")
+
             }
             if (scene == 2.1) {
-                setTimeout(dialogue,0000,"You: Where am I?");
+                setTimeout(dialogue, 0000, "You: Where am I?");
 
-                setTimeout(dialogue,1000,"Guard:You are in the castle of Smae of course");
-                setTimeout(dialogue,2000,"You:Ok");
-                setTimeout(dialogue,4000,"You: Who are you?");
-                setTimeout(dialogue,6000,"Guard: I am an honorary guard of the second britalion ");                
-                setTimeout(dialogue,8000,"You: How did I get here?");
-                setTimeout(dialogue,10000,"Guard: We just saw you sleeping on the ground.");
-                setTimeout(dialogue,12000,"You: Wait wait… where am I again??");
-                setTimeout(dialogue,14000,"Guard: The Castle Of Smae.");
-                setTimeout(dialogue,16000,"You: What happens in this place?");
-                setTimeout(dialogue,18000,"Guard: Well it's mostly just people in a castle living their lives.");
-                setTimeout(dialogue,20000,"You: Do you know who rules this place?");
-                setTimeout(dialogue,22000,"Guard: Its King Smae I. He is the ruler of this place");
-                setTimeout(dialogue,24000,"You: Ok.");
-                setTimeout(dialogue,26000,"Guard: Your welcome");
-                setTimeout(dialogue,28000,"You: Also where is the nearest market, I'm STARVING!!!!");
-                setTimeout(dialogue,30000,"Guard: Oh it's just down the road. But here's my leftover lunch.");
-                setTimeout(dialogue,32000, "<i>Bread added to inventory</i>");
-                setTimeout(invpush, 32000, "Bread", "bread.png")
-                setTimeout(dialogue,34000,"You: Thanks and bye!");
-                setTimeout(dialogue,36000,"Guard: Bye!");
-                setTimeout(dialogue,38000,"<i>You walk to the market</i>");
+                setTimeout(dialogue, 1000, "Guard:You are in the castle of Smae of course");
+                setTimeout(dialogue, 2000, "You:Ok");
+                setTimeout(dialogue, 4000, "You: Who are you?");
+                setTimeout(dialogue, 6000, "Guard: I am an honorary guard of the second britalion ");
+                setTimeout(dialogue, 8000, "You: How did I get here?");
+                setTimeout(dialogue, 10000, "Guard: We just saw you sleeping on the ground.");
+                setTimeout(dialogue, 12000, "You: Wait wait… where am I again??");
+                setTimeout(dialogue, 14000, "Guard: The Castle Of Smae.");
+                setTimeout(dialogue, 16000, "You: What happens in this place?");
+                setTimeout(dialogue, 18000, "Guard: Well it's mostly just people in a castle living their lives.");
+                setTimeout(dialogue, 20000, "You: Do you know who rules this place?");
+                setTimeout(dialogue, 22000, "Guard: Its King Smae I. He is the ruler of this place");
+                setTimeout(dialogue, 24000, "You: Ok.");
+                setTimeout(dialogue, 26000, "Guard: Your welcome");
+                setTimeout(dialogue, 28000, "You: Also where is the nearest market, I'm STARVING!!!!");
+                setTimeout(dialogue, 30000, "Guard: Oh it's just down the road. But here's my leftover lunch.");
+                setTimeout(dialogue, 32000, "<i>Bread added to inventory</i>");
+                setTimeout(invpush, 32000, "Bread", "bread.png","Food", "Heal: 5")
+                setTimeout(dialogue, 34000, "You: Thanks and bye!");
+                setTimeout(dialogue, 36000, "Guard: Bye!");
+                setTimeout(dialogue, 38000, "<i>You walk to the market</i>");
 
                 scene = 2.11;
- 
+
             }
             if (scene == 2.2) {
-                setTimeout(dialogue,0000,"You: Who are you?");
-                setTimeout(dialogue,3000,"Guard: I am an honorary guard of the second britalion ");                
-                setTimeout(dialogue,6000,"You: How did I get here?");
-                setTimeout(dialogue,90000,"Guard: We just saw you sleeping on the ground.");
-                setTimeout(dialogue,12000,"You: Wait wait… where am I again??");
-                setTimeout(dialogue,14000,"Guard: The Castle Of Smae.");
-                setTimeout(dialogue,16000,"You: What happens in this place?");
-                setTimeout(dialogue,18000,"Guard: Well it's mostly just people in a castle living their lives.");
-                setTimeout(dialogue,20000,"You: Do you know who rules this place?");
-                setTimeout(dialogue,22000,"Guard: Its King Smae I. He is the ruler of this place");
-                setTimeout(dialogue,24000,"You: Ok.");
-                setTimeout(dialogue,26000,"Guard: Your welcome");
-                setTimeout(dialogue,28000,"You: Also where is the nearest market, I'm STARVING!!!!");
-                setTimeout(dialogue,30000,"Guard: Oh it's just down the road. But here's my leftover lunch.");
+                setTimeout(dialogue, 0000, "You: Who are you?");
+                setTimeout(dialogue, 3000, "Guard: I am an honorary guard of the second britalion ");
+                setTimeout(dialogue, 6000, "You: How did I get here?");
+                setTimeout(dialogue, 90000, "Guard: We just saw you sleeping on the ground.");
+                setTimeout(dialogue, 12000, "You: Wait wait… where am I again??");
+                setTimeout(dialogue, 14000, "Guard: The Castle Of Smae.");
+                setTimeout(dialogue, 16000, "You: What happens in this place?");
+                setTimeout(dialogue, 18000, "Guard: Well it's mostly just people in a castle living their lives.");
+                setTimeout(dialogue, 20000, "You: Do you know who rules this place?");
+                setTimeout(dialogue, 22000, "Guard: Its King Smae I. He is the ruler of this place");
+                setTimeout(dialogue, 24000, "You: Ok.");
+                setTimeout(dialogue, 26000, "Guard: Your welcome");
+                setTimeout(dialogue, 28000, "You: Also where is the nearest market, I'm STARVING!!!!");
+                setTimeout(dialogue, 30000, "Guard: Oh it's just down the road. But here's my leftover lunch.");
                 setTimeout(dialogue, 32000, "<i>Bread added to inventory</i>");
-                setTimeout(invpush, 32000, "Bread", "bread.png")
+                setTimeout(invpush, 32000, "Bread", "bread.png","Food","Heal: 5")
 
-                setTimeout(dialogue,34000,"You: Thanks and bye!");
-                setTimeout(dialogue,36000,"Guard: Bye!");
-                setTimeout(dialogue,38000,"<i>You walk to the market</i>");
+                setTimeout(dialogue, 34000, "You: Thanks and bye!");
+                setTimeout(dialogue, 36000, "Guard: Bye!");
+                setTimeout(dialogue, 38000, "<i>You walk to the market</i>");
 
                 scene = 2.11;
- 
+
             }
 
             if (scene == 2.11) {
-                setTimeout(sceneset,40000,2.3);
+                setTimeout(sceneset, 40000, 2.3);
             }
             if (scene == 2.3) {
-              
-                setTimeout(sceneset,4000,3)
+
+                setTimeout(sceneset, 4000, 3)
             }
             if (scene == 3) {
                 dialogue("<i>You enter the market. There is a store, and an old lady.</i><br><br><span class='option' id='3.1' ><i>Look at the shop</i></span><br><span class='option' id='3.2'><i>Talk to the old lady</i></span>")
@@ -247,8 +252,8 @@
                 dialogue("<i>You walk up to the map store.</i><br><br>Shopkeeper One: hello youngling what are you doing in my humble map making shop.<br><br><span class='option' id='3.11' >Map making shop?</span><br><span class='option' id='3.12'>What's your name?</span>")
             }
             if (scene == 3.11) {
-                setTimeout(dialogue,0000,"You: Map making shop?");
-                setTimeout(dialogue,3000,"Shopkeeper One: ye this tis me lil shop do you want to have one I think I might have a spere map of smae castle but if you want more you’ll Have ta give me ten gems. Well do ya wan it?<br><br><span class='option' id='3.111'>Yes please</span><br><span class='option' id='3.112'>No thanks</span>");
+                setTimeout(dialogue, 0000, "You: Map making shop?");
+                setTimeout(dialogue, 3000, "Shopkeeper One: ye this tis me lil shop do you want to have one I think I might have a spere map of smae castle but if you want more you’ll Have ta give me ten gems. Well do ya wan it?<br><br><span class='option' id='3.111'>Yes please</span><br><span class='option' id='3.112'>No thanks</span>");
 
                 scene = 3.011;
             }
@@ -260,25 +265,25 @@
                 setTimeout(dialogue, 10000, "<i>Press E to use</i>")
                 setTimeout(dialogue, 12000, "You: Thanks! ")
                 setTimeout(dialogue, 18000, "Shopkeeper: Here's a bunch of random useless stuff! ")
-                
-                setTimeout(invpush, 18000, "Fish", "fish.png","common");
-                setTimeout(invpush, 18000, "paper", "paper.png","uncommon");
-                setTimeout(invpush, 18000, "Portal", "portal.png","rare");
-                setTimeout(invpush, 18000, "Canoe Paddle", "paddle.png","limited");
-                setTimeout(invpush, 18000, "Brick", "brick.png","scarce");
-                setTimeout(invpush, 18000, "Blanket", "blanket.png","extreme");
-                setTimeout(invpush, 18000, "star", "star.png", "isolated");
-                setTimeout(invpush, 18000, "star", "star.png", "godly");
-                setTimeout(invpush, 18000, "star", "star.png", "rainbow");
-                setTimeout(invpush, 18000, "star", "star.png", "invisible");
-                setTimeout(invpush, 18000, "Axe", "axe.png", "impossible");
-                setTimeout(invpush, 18000, "Axe", "axe.png", "theone");
-                setTimeout(invpush, 18000, "Axe", "axe.png", "???");
-                setTimeout(invpush, 18000, "Axe", "axe.png", "q");
+
+                setTimeout(invpush, 18000, "Fish", "fish.png", "common","Food","Heal: 5");
+                setTimeout(invpush, 18000, "paper", "paper.png", "uncommon","Something to write on","");
+                setTimeout(invpush, 18000, "Portal", "portal.png", "rare","Will teleport things from one place to another.","");
+                setTimeout(invpush, 18000, "Canoe Paddle", "paddle.png", "limited","Moves a canoe","Speed: 15");
+                setTimeout(invpush, 18000, "Brick", "brick.png", "scarce","Build houses","");
+                setTimeout(invpush, 18000, "Blanket", "blanket.png", "extreme", "Keep you warm","");
+                setTimeout(invpush, 18000, "star", "star.png", "isolated", "no", "Fortune: &pi;<br>Cheese: i");
+                setTimeout(invpush, 18000, "star", "star.png", "godly",1,1);
+                setTimeout(invpush, 18000, "star", "star.png", "rainbow",1,1);
+                setTimeout(invpush, 18000, "star", "star.png", "invisible",1,1);
+                setTimeout(invpush, 18000, "Axe", "axe.png", "impossible",1,1);
+                setTimeout(invpush, 18000, "Axe", "axe.png", "theone",1,1);
+                setTimeout(invpush, 18000, "Axe", "axe.png", "???",1,1);
+                setTimeout(invpush, 18000, "Axe", "axe.png", "q",1,1);
                 scene = 3.1111;
             }
             if (scene == 3.1111) {
-                setTimeout( sceneset,21000,4)
+                setTimeout(sceneset, 21000, 4)
             }
             if (scene == 3.112) {
                 dialogue("Shopkeeper: Why not sonny?")
@@ -287,7 +292,7 @@
                 setTimeout(dialogue, 8000, "<i>The Smae Kingdom Map added to your inventory</i>")
                 setTimeout(dialogue, 10000, "<i>Press E to use</i>")
                 setTimeout(dialogue, 12000, "You: Thanks! ")
-                scene = 3.1111; 
+                scene = 3.1111;
             }
             if (scene == 3.12) {
                 dialogue("Shopkeeper: Yes! A map making shop! We make maps for near and far! Now sonny boy, do ya want anything ?<br><br><span class='option' id='3.11'>Could I have a map of Smae Kingdom?</span><br><span class='option' id='3.3' >No thanks</span>")
@@ -297,7 +302,7 @@
                 setTimeout(sceneset, 3000, 4);
             }
             if (scene == 3.2) {
-                setTimeout(dialogue, 0000,"Old Lady: Hello? What are you doing here young one?<br><br><span class='option' id='3.21'>What is this place?</span><br><span class='option' id='3.22'>Who are you?</span>")
+                setTimeout(dialogue, 0000, "Old Lady: Hello? What are you doing here young one?<br><br><span class='option' id='3.21'>What is this place?</span><br><span class='option' id='3.22'>Who are you?</span>")
             }
             if (scene == 3.21) {
                 setTimeout(dialogue, 0000, "You: What is this place?")
@@ -317,17 +322,17 @@
                 setTimeout(dialogue, 9000, "Old Lady: Definity the Boar Slice! It's a slice of cake with some secret ingredient that we the people can't know.")
                 setTimeout(dialogue, 12000, "Old Lady: I have one in my bag you can have it.")
                 setTimeout(dialogue, 15000, "<i>The Bore Slice added to your inventory</i>")
-                setTimeout(invpush,15000,"Bore Slice", "boreslice.png","uncommon")
+                setTimeout(invpush, 15000, "Bore Slice", "boreslice.png", "uncommon","Food", "Sickness duration: 30sec<br>Heal:15")
 
                 setTimeout(dialogue, 18000, "<i> Press E to eat </i>")
                 scene = 3.212;
             }
             if (scene == 3.212) {
-                setTimeout(sceneset,21000,4)
+                setTimeout(sceneset, 21000, 4)
             }
             if (scene == 4) {
                 dialogue("The end for now! You have reached a part of the game which is still under development.")
-                clearInterval(int);
+                
             }
             var ops = document.getElementsByClassName("option");
             if (keys && keys[38] >= 1) {
@@ -337,7 +342,7 @@
                     dialogrow = ops.length - 1;
                 }
             }
-            if (keys && keys[40] >= 1 ) {
+            if (keys && keys[40] >= 1) {
                 keys[40] = 0;
 
                 dialogrow += 1;
@@ -345,15 +350,15 @@
                     dialogrow = 0;
                 }
             }
-            if (keys && keys[39] >= 1){
+            if (keys && keys[39] >= 1) {
                 keys[39] = 0;
-            sceneset(ops[dialogrow].id);
-            console.log("PAPAYa")
-        }
+                sceneset(ops[dialogrow].id);
+                console.log("PAPAYa")
+            }
             for (var x = 0; x < ops.length; x++) {
                 if (x == dialogrow) {
                     ops[x].classList.add("active");
-                    
+
                 } else {
                     ops[x].classList.remove("active");
                 }
@@ -362,24 +367,43 @@
             console.log(scene)
             inventory.innerHTML = "";
             for (var x = 0; x < itemlist.length; x++) {
-                inventory.innerHTML += "<img src='" + itemimgs[x] + "'style='width: 30px; height: 30px' /><span class='invitem'>" + itemlist[x] + "</span>"
+                inventory.innerHTML += "<span onmouseover='activeitem(" + x + ")'><img src='" + itemimgs[x] + "'style='width: 30px; height: 30px' /><span class='invitem'>" + itemlist[x] + "</span>"
                 if (invraritys[x] == "rainbow") {
                     inventory.innerHTML += "<span class='other'><span style='color: red; font-style: italic; background-color: black'>R</span><span style='color: orange; font-style: italic; background-color: black'>A</span><span style='color: yellow; font-style: italic; background-color: black'>I</span><span style='color: green; font-style: italic; background-color: black'>N</span><span style='color: blue; font-style: italic; background-color: black'>B</span><span style='color: indigo; font-style: italic; background-color: black'>O</span><span style='color: violet; font-style: italic; background-color: black'>W</span></span><br>"
                 } else if (invraritys[x] == "???") {
                     inventory.innerHTML += "<span class='other'><span style='color: red; font-style: italic; background-color: black'>? </span><span style='color: blue; font-style: italic; background-color: black'>? </span><span style='color: green; font-style: italic; background-color: black'>?</span></span><br>"
                 } else {
                     inventory.innerHTML += "<span class='" + invraritys[x] + "'></span><br>"
-                }               
+                }
+                inventory.innerHTML += "</span>"
+            }
+            if (itemlist[0]) {
+                ai.innerHTML = "";
+                ai.innerHTML += "<img src='" + itemimgs[invrow] + "'style='width: 60px; height: 60px;'><br><span>" + itemlist[invrow] + "</span><br>";
+                if (invraritys[invrow] == "rainbow") {
+                    ai.innerHTML += "<span class='other'><span style='color: red; font-style: italic; background-color: black'>R</span><span style='color: orange; font-style: italic; background-color: black'>A</span><span style='color: yellow; font-style: italic; background-color: black'>I</span><span style='color: green; font-style: italic; background-color: black'>N</span><span style='color: blue; font-style: italic; background-color: black'>B</span><span style='color: indigo; font-style: italic; background-color: black'>O</span><span style='color: violet; font-style: italic; background-color: black'>W</span></span><br>"
+                } else if (invraritys[x] == "???") {
+                    ai.innerHTML += "<span class='other'><span style='color: red; font-style: italic; background-color: black'>? </span><span style='color: blue; font-style: italic; background-color: black'>? </span><span style='color: green; font-style: italic; background-color: black'>?</span></span><br>"
+                } else {
+                    ai.innerHTML += "<span class='" + invraritys[invrow] + "'></span><br>"
+                }
+                ai.innerHTML += invdesc[invrow] + "<br>" + invstat[invrow] + "<br>";
             }
         }
-        function invpush(item, src,rarity) {
+        function invpush(item, src,rarity,desc,stat) {
             itemlist.push(item);
             itemimgs.push(src);
-            invraritys.push(rarity)
+            invraritys.push(rarity);
+            invdesc.push(desc);
+            invstat.push(stat)
             console.log(item,src)
         }
         function sceneset(x) {
 scene = x;
+        }
+        function activeitem(f) {
+            invrow = f;
+            console.warn(invrow)
         }
         function dialogue(x) {
             dialog.innerHTML = x;
